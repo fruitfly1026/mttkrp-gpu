@@ -31,10 +31,18 @@ typedef float mtype;
 #endif
 
 // typedef unsigned long type_thread;
-// typedef uint8_t type_thread;
-// typedef uint16_t type_thread;
-// typedef uint32_t type_thread;
-typedef uint64_t type_thread;
+#ifdef CHAR
+  typedef uint8_t type_thread;
+#endif
+#ifdef SHORT
+  typedef uint16_t type_thread;
+#endif
+#ifdef INT
+  typedef uint32_t type_thread;
+#endif
+#ifdef LONG
+  typedef uint64_t type_thread;
+#endif
 
 void convert(tensor data, stensor &CPU_tensor, int nnz, int mode);
 #endif

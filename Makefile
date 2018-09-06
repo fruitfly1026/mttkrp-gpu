@@ -23,7 +23,7 @@ CU_OBJS=$(CU_SOURCES:.cu=.o)
 
 DOUBLEFLAGS = -DDOUBLE
 TYPEFLAGS = -DLONG
-#typeflags = -DLONG -DINT -DSHORT -DCHAR
+# TYPEFLAGS = -DLONG -DINT -DSHORT -DCHAR
 
 CFLAGS = -O3 -std=c++11  -Xcompiler -fopenmp $(DOUBLEFLAGS) $(TYPEFLAGS) -Wno-deprecated-declarations
 
