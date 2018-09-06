@@ -3,6 +3,7 @@
 #include "readtensor.h"
 #include <stdlib.h>
 #include <malloc.h>
+#include <stdint.h>
 
 template <typename T>
 struct soa_tensor {
@@ -29,7 +30,11 @@ typedef soa_tensor<float> stensor;
 typedef float mtype;
 #endif
 
-typedef unsigned long type_thread;
+// typedef unsigned long type_thread;
+// typedef uint8_t type_thread;
+// typedef uint16_t type_thread;
+// typedef uint32_t type_thread;
+typedef uint64_t type_thread;
 
 void convert(tensor data, stensor &CPU_tensor, int nnz, int mode);
 #endif

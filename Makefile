@@ -1,5 +1,7 @@
 CC = nvcc
 SOURCEDIR = ./
+SPLATTDIR = /people/liji541/Software/Install
+CUDADIR = /share/apps/cuda/9.2.148
 
 EXE = main
 
@@ -10,9 +12,9 @@ SOURCES = $(SOURCEDIR)/MTTKRP.cpp \
 
 CU_SOURCES = $(SOURCEDIR)/gpuMTTKRP.cu	
 
-IDIR = -I/usr/local/cuda/samples/common/inc -I/home/labuser/splatt-1.1.1/include
+IDIR = -I$(CUDADIR)/samples/common/inc -I$(SPLATTDIR)/include
 
-LDIR = -L/usr/local/cuda/lib64
+LDIR = -L$(CUDADIR)/lib64 -L$(SPLATTDIR)/lib
 
 H_FILES = $(wildcard *.h)
 OBJS = $(SOURCES:.cpp=.o)
@@ -23,10 +25,11 @@ DOUBLEFLAGS = -DDOUBLE
 TYPEFLAGS = -DLONG
 #typeflags = -DLONG -DINT -DSHORT -DCHAR
 
-CFLAGS = -O3 -std=c++11  -Xcompiler -fopenmp $(DOUBLEFLAGS) $(TYPEFLAGS)
+CFLAGS = -O3 -std=c++11  -Xcompiler -fopenmp $(DOUBLEFLAGS) $(TYPEFLAGS) -Wno-deprecated-declarations
 
-LFLAGS = -lm -lstdc++ -lsplatt 
-SMS ?= 35 37 50 52 60
+LFLAGS = $(LDIR) -lm -lstdc++ -lsplatt 
+SMS ?= 60
+# SMS ?= 35 37 50 52 60
 #SMS ?= 20 30 35 37 50 52 60
 
 ifeq ($(SMS),)

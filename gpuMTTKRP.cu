@@ -401,10 +401,9 @@ __global__ void mergeSum(T *last_partial,
 
 mtype *callTTM(stensor ltensor, mtype *Bmatrix, mtype *Cmatrix, int B_nRows, int C_nRows, int nCols, semitensor rtensor, type_thread threadtype, int blocksize) {
   int BLOCK_SIZE = blocksize;
-
-
-
   int threadlen = sizeof(threadtype) * 8;
+  printf("threadtype: %lu, threadlen: %d\n", threadtype, threadlen);
+
   transpose_matrix(Bmatrix, B_nRows, nCols);
   transpose_matrix(Cmatrix, C_nRows, nCols);
 
@@ -469,7 +468,7 @@ mtype *callTTM(stensor ltensor, mtype *Bmatrix, mtype *Cmatrix, int B_nRows, int
   cudaEventSynchronize(stop);
   cudaEventElapsedTime(&et, start, stop);
 
-  printf("GPU TTM Time: %f s\n", et / 1000.0);
+  printf("GPU MTTKRP Time: %f s\n", et / 1000.0);
 
   cudaDeviceSynchronize();
   printf("%d %s\n", __LINE__, cudaGetErrorString(cudaGetLastError()));
